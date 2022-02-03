@@ -146,8 +146,6 @@ if [[ $num_tainted_worker_nodes -gt 0 || $num_not_found_nodes -gt 0 ]]; then
 fi
 
 # Delete disk & node info files from folders: cortx-data-blk-data, cortx-data
-find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "mnt-blk-*" -delete
-find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "node-list-*" -delete
 find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "mnt-blk-*" -delete
 find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "node-list-*" -delete
 
@@ -160,8 +158,8 @@ count=0
 
 mnt_blk_info_fname="mnt-blk-info.txt"
 node_list_info_fname="node-list-info.txt"
-cortx_blk_data_mnt_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data/$mnt_blk_info_fname
-cortx_blk_data_node_list_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data/$node_list_info_fname
+cortx_blk_data_mnt_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data/$mnt_blk_info_fname
+cortx_blk_data_node_list_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data/$node_list_info_fname
 
 count=0
 for var_val_element in "${parsed_var_val_array[@]}"
@@ -1230,8 +1228,6 @@ function cleanup()
 
     rm -rf "$cfgmap_path/auto-gen-secret-$namespace"
 
-    find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "mnt-blk-*" -delete
-    find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "node-list-*" -delete
     find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "mnt-blk-*" -delete
     find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "node-list-*" -delete
 }
@@ -1309,7 +1305,7 @@ done
 
 num_motr_client=$(extractBlock 'solution.common.motr.num_client_inst')
 
-deployCortxLocalBlockStorage
+#deployCortxLocalBlockStorage
 deleteStaleAutoGenFolders
 deployCortxConfigMap
 deployCortxSecrets

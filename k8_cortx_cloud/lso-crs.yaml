@@ -1,0 +1,36 @@
+apiVersion: "local.storage.openshift.io/v1"
+kind: "LocalVolume"
+metadata:
+  name: "local-disks"
+  namespace: "openshift-local-storage"
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ssc-vm-g2-rhev4-1988.colo.seagate.com
+          - ssc-vm-g2-rhev4-1989.colo.seagate.com
+          - ssc-vm-g2-rhev4-2367.colo.seagate.com
+          - ssc-vm-g2-rhev4-2368.colo.seagate.com
+  storageClassDevices:
+    - storageClassName: "localblock"
+      volumeMode: Block 
+      devicePaths:
+        - /dev/sdc
+        - /dev/sdd
+        - /dev/sde
+        - /dev/sdf
+#    - storageClassName: "localblock-sdd"
+#      volumeMode: Block 
+#      devicePaths:
+#        - /dev/sdd
+#    - storageClassName: "localblock-sde"
+#      volumeMode: Block 
+#      devicePaths:
+#        - /dev/sde
+#    - storageClassName: "localblock-sdf"
+#      volumeMode: Block 
+#      devicePaths:
+#        - /dev/sdf

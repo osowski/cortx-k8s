@@ -53,7 +53,7 @@ spec:
         {{- if hasPrefix $nodename $parsednodename }}
         - name: {{ printf "cortx-data-%s-pv-%s" $disk $index }}
           persistentVolumeClaim:
-            claimName: {{ printf "cortx-data-%s-pvc-%s" $disk $index }}
+            claimName: {{ printf "%s-pvc-%s" $.Values.cortxdata.name $disk }}
         {{- end }}
         {{- end }}
         {{- end }}

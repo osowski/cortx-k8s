@@ -496,8 +496,6 @@ function cleanup()
         rm $(pwd)/cortx-cloud-helm-pkg/cortx-data/$file_name
     done
     
-    find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "mnt-blk-*" -delete
-    find $(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data -name "node-list-*" -delete
     find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "mnt-blk-*" -delete
     find $(pwd)/cortx-cloud-helm-pkg/cortx-data -name "node-list-*" -delete
 }
@@ -515,7 +513,7 @@ deleteCortxServices
 deleteCortxControl
 waitForCortxPodsToTerminate
 deleteSecrets
-deleteCortxLocalBlockStorage
+#deleteCortxLocalBlockStorage
 deleteCortxPVs
 deleteCortxConfigmap
 

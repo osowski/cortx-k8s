@@ -1,0 +1,25 @@
+# Loop through the mounted block info file which contains the following:
+# /dev/sdc 100Gi
+# /dev/sdd 100Gi
+{{- range $mntblkinfoline := $.Files.Lines $.Values.cortxdata.mountblkinfo }}
+{{- $mntblkparts := split " " . }}
+{{- $localpath := $mntblkparts._0 }}
+{{- $mountblksize := $mntblkparts._1 }}
+{{- $disk := (base $localpath) }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ printf "%s-pvc-%s" $.Values.cortxdata.name $disk}}
+  namespace: {{ $.Values.namespace }}
+spec:
+  # TESTING OpenShift Local Storage Operator
+  # REQUIRES/GENERATES RWO by default
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: "Block"
+  storageClassName: "localblock"
+  resources:
+     requests:
+       storage: {{ $mountblksize }}
+---
+{{- end }}
