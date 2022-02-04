@@ -22,15 +22,10 @@ spec:
         - /dev/sdd
         - /dev/sde
         - /dev/sdf
-#    - storageClassName: "localblock-sdd"
-#      volumeMode: Block 
-#      devicePaths:
-#        - /dev/sdd
-#    - storageClassName: "localblock-sde"
-#      volumeMode: Block 
-#      devicePaths:
-#        - /dev/sde
-#    - storageClassName: "localblock-sdf"
-#      volumeMode: Block 
-#      devicePaths:
-#        - /dev/sdf
+    - storageClassName: "localfs"
+      volumeMode: Filesystem
+      fsType: ext4
+      devicePaths:
+        - /dev/sdg
+        - /dev/sdh
+        - /dev/sdi
