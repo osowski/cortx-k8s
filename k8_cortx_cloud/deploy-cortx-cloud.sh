@@ -180,7 +180,7 @@ do
 done
 
 # Copy cluster node info file from CORTX local block helm to CORTX data
-cp $cortx_blk_data_node_list_info_path $(pwd)/cortx-cloud-helm-pkg/cortx-data
+#cp $cortx_blk_data_node_list_info_path $(pwd)/cortx-cloud-helm-pkg/cortx-data
 
 # Get the devices from the solution
 filter="solution.storage.cvg*.devices*.device"
@@ -206,7 +206,7 @@ do
 done
 
 # Copy device info file from CORTX local block helm to CORTX data
-cp $cortx_blk_data_mnt_info_path $(pwd)/cortx-cloud-helm-pkg/cortx-data
+#cp $cortx_blk_data_mnt_info_path $(pwd)/cortx-cloud-helm-pkg/cortx-data
 
 # Create CORTX namespace
 if [[ "$namespace" != "default" ]]; then
