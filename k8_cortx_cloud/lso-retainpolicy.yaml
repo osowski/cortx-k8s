@@ -1,0 +1,30 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: localblock-retain
+provisioner: kubernetes.io/no-provisioner
+reclaimPolicy: Retain
+volumeBindingMode: WaitForFirstConsumer
+---
+apiVersion: "local.storage.openshift.io/v1"
+kind: "LocalVolume"
+metadata:
+  name: "local-disks-retain"
+  namespace: "openshift-local-storage"
+spec:
+  nodeSelector:
+    nodeSelectorTerms:
+    - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - ssc-vm-g2-rhev4-1988.colo.seagate.com
+          - ssc-vm-g2-rhev4-1989.colo.seagate.com
+          - ssc-vm-g2-rhev4-2367.colo.seagate.com
+          - ssc-vm-g2-rhev4-2368.colo.seagate.com
+  storageClassDevices:
+    - storageClassName: "localblock-retain"
+      volumeMode: Block 
+      devicePaths:
+        - /dev/sdg
