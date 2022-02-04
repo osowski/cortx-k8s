@@ -6,7 +6,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: local-path
+  storageClassName: {{ .Values.cortxdata.localpathpvc.storageclassname }}
   resources:
     requests:
       storage: {{ .Values.cortxdata.localpathpvc.requeststoragesize }}

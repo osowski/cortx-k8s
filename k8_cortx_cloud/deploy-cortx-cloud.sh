@@ -1,7 +1,8 @@
 #!/bin/bash
 
 solution_yaml=${1:-'solution.yaml'}
-storage_class='local-path'
+#storage_class='local-path'
+storage_class='localfs'
 
 ##TODO Extract from solution.yaml ? 
 serviceAccountName=cortx-sa
@@ -306,7 +307,7 @@ function deployConsul()
         --set global.name="consul" \
         --set global.image=$image \
         --set ui.enabled=false \
-        --set server.storageClass=$storage_class \
+        --set server.storageClass="$storage_class" \
         --set server.replicas=$num_consul_replicas \
         --set server.resources.requests.memory=$(extractBlock 'solution.common.resource_allocation.consul.server.resources.requests.memory') \
         --set server.resources.requests.cpu=$(extractBlock 'solution.common.resource_allocation.consul.server.resources.requests.cpu') \
@@ -960,6 +961,7 @@ function deployCortxControl()
         --set cortxcontrol.localpathpvc.name="cortx-control-fs-local-pvc-$namespace" \
         --set cortxcontrol.localpathpvc.mountpath="$local_storage" \
         --set cortxcontrol.localpathpvc.requeststoragesize="1Gi" \
+        --set cortxcontrol.localpathpvc.storageclassname="$storage_class" \
         --set cortxcontrol.secretinfo="secret-info.txt" \
         --set cortxcontrol.serviceaccountname="$serviceAccountName" \
         --set namespace=$namespace \
@@ -1009,6 +1011,7 @@ function deployCortxData()
             --set cortxdata.localpathpvc.name="cortx-data-fs-local-pvc-$node_name" \
             --set cortxdata.localpathpvc.mountpath="$local_storage" \
             --set cortxdata.localpathpvc.requeststoragesize="1Gi" \
+            --set cortxdata.localpathpvc.storageclassname="$storage_class" \
             --set cortxdata.motr.numiosinst=${#cvg_index_list[@]} \
             --set cortxdata.motr.startportnum=$(extractBlock 'solution.common.motr.start_port_num') \
             --set cortxdata.secretinfo="secret-info.txt" \
@@ -1071,6 +1074,7 @@ function deployCortxServer()
             --set cortxserver.localpathpvc.name="cortx-server-fs-local-pvc-$node_name" \
             --set cortxserver.localpathpvc.mountpath="$local_storage" \
             --set cortxserver.localpathpvc.requeststoragesize="1Gi" \
+            --set cortxserver.localpathpvc.storageclassname="$storage_class" \
             --set cortxserver.s3.numinst=$(extractBlock 'solution.common.s3.num_inst') \
             --set cortxserver.s3.startportnum=$(extractBlock 'solution.common.s3.start_port_num') \
             --set cortxserver.secretinfo="secret-info.txt" \
@@ -1126,6 +1130,7 @@ function deployCortxHa()
         --set cortxha.localpathpvc.name="cortx-ha-fs-local-pvc-$namespace" \
         --set cortxha.localpathpvc.mountpath="$local_storage" \
         --set cortxha.localpathpvc.requeststoragesize="1Gi" \
+        --set cortxha.localpathpvc.storageclassname="$storage_class" \
         --set cortxha.secretinfo="secret-info.txt" \
         --set namespace=$namespace \
         -n $namespace
@@ -1176,6 +1181,7 @@ function deployCortxClient()
             --set cortxclient.localpathpvc.name="cortx-client-fs-local-pvc-$node_name" \
             --set cortxclient.localpathpvc.mountpath="$local_storage" \
             --set cortxclient.localpathpvc.requeststoragesize="1Gi" \
+            --set cortxclient.localpathpvc.storageclassname="$storage_class" \
             --set namespace=$namespace \
             -n $namespace
     done

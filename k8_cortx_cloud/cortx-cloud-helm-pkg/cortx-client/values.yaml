@@ -26,3 +26,4 @@ cortxclient:
     name: cortx-client-fs-local-pvc
     mountpath: /etc/cortx # This is the mount path in the container
     requeststoragesize: 1Gi
+    storageclassname: local-path

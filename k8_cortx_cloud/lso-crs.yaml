@@ -26,6 +26,10 @@ spec:
       volumeMode: Filesystem
       fsType: ext4
       devicePaths:
-        - /dev/sdg
-        - /dev/sdh
-        - /dev/sdi
+        - /dev/sdg1
+        - /dev/sdg2
+        - /dev/sdg3
+        - /dev/sdg4
+        - /dev/sdg5
+        - /dev/sdg6
+        - /dev/sdg7
