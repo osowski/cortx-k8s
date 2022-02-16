@@ -5,15 +5,15 @@ cortx:
         - tcp://<<.Values.cortx.external.kafka.endpoints>>:9092
       admin: admin
       secret: kafka_admin_secret
-    openldap:
-      endpoints:
-        - ldap://<<.Values.cortx.external.openldap.endpoints>>:389
-        - ssl://<<.Values.cortx.external.openldap.endpoints>>:636
-      servers:
-        <<.Values.cortx.external.openldap.servers>>
-      admin: admin
-      secret: openldap_admin_secret
-      base_dn: dc=seagate,dc=com
+    #openldap:
+    #  endpoints:
+    #    - ldap://<<.Values.cortx.external.openldap.endpoints>>:389
+    #    - ssl://<<.Values.cortx.external.openldap.endpoints>>:636
+    #  servers:
+    #    <<.Values.cortx.external.openldap.servers>>
+    #  admin: admin
+    #  secret: openldap_admin_secret
+    #  base_dn: dc=seagate,dc=com
     consul:
       endpoints:
         - tcp://<<.Values.cortx.external.consul.endpoints>>:8301
@@ -40,18 +40,21 @@ cortx:
       device_certificate: /etc/cortx/solution/ssl/stx.pem
   utils:
     message_bus_backend: kafka
-    data:
-      endpoints:
-      - http://<<.Values.cortx.io.svc>>:80
-      - https://<<.Values.cortx.io.svc>>:443
-    internal:
-      endpoints:
-      - http://<<.Values.cortx.io.svc>>:28049
-    auth_secret: s3_auth_admin_secret
+    #data:
+    #  endpoints:
+    #  - http://<<.Values.cortx.io.svc>>:80
+    #  - https://<<.Values.cortx.io.svc>>:443
+    #internal:
+    #  endpoints:
+    #  - http://<<.Values.cortx.io.svc>>:28049
+    #auth_secret: s3_auth_admin_secret
   rgw:
-    auth_user: user_name                      #Hard-coded for now, will be replaced by CORTX-28022
-    auth_admin: sgiamadmin                    #Hard-coded for now, will be replaced by CORTX-28022
-    auth_secret: s3_default_iam_secret_key    #Hard-coded for now, will be replaced by CORTX-28022
+    #Hard-coded for now, will be replaced by CORTX-28022
+    auth_user: user_name
+    #Hard-coded for now, will be replaced by CORTX-28022
+    auth_admin: sgiamadmin
+    #Hard-coded for now, will be replaced by CORTX-28022    
+    auth_secret: s3_default_iam_secret_key
     data:
       endpoints:
       - http://<<.Values.cortx.io.svc>>:80
@@ -86,13 +89,11 @@ cortx:
           min: 250m
           max: 500m
   motr:
-    client_instances: <<.Values.cortx.num_motr_inst>>
-    interface_type: tcp
     interface_family: inet
     transport_type: libfab
-    md_size: 10 
+    #md_size: 10 
     ios:
-      group_size: 1
+      #group_size: 1
       endpoints:
         <<.Values.cortx.motr.ios>>
     confd:
@@ -123,8 +124,8 @@ cortx:
         num_instances: <<.Values.cortx.num_motr_inst>>
         endpoints: <<.Values.cortx.motr.client>>
   csm:
-    auth_admin: authadmin
-    auth_secret: csm_auth_admin_secret
+    #auth_admin: authadmin
+    #auth_secret: csm_auth_admin_secret
     mgmt_admin: cortxadmin
     mgmt_secret: csm_mgmt_admin_secret
     email_address: cortx@seagate.com
