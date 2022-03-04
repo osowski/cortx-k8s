@@ -34,6 +34,9 @@ num_openldap_replicas=0 # Default the number of actual openldap instances
 num_worker_nodes=0
 not_ready_node_list=[]
 not_ready_node_count=0
+mnt_blk_info_fname="mnt-blk-info.txt"
+node_list_info_fname="node-list-info.txt"
+
 # Create a file consist of a list of node info and up to 'max_openldap_inst'
 # number of nodes. This file is used by OpenLDAP helm chart and will be deleted
 # at the end of this script.
@@ -183,8 +186,6 @@ node_name_list=[] # short version. Ex: ssc-vm-g3-rhev4-1490
 node_selector_list=[] # long version. Ex: ssc-vm-g3-rhev4-1490.colo.seagate.com
 count=0
 
-mnt_blk_info_fname="mnt-blk-info.txt"
-node_list_info_fname="node-list-info.txt"
 cortx_blk_data_mnt_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data/$mnt_blk_info_fname
 cortx_blk_data_node_list_info_path=$(pwd)/cortx-cloud-helm-pkg/cortx-data-blk-data/$node_list_info_fname
 
