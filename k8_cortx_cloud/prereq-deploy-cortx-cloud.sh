@@ -242,8 +242,8 @@ function prepCortxDeployment()
         # the blkid command will return the UUID of the mounted filesystem either way
         blk_uuid=$(blkid ${disk} -o export | grep UUID | awk '{split($0,a,"="); print a[2]}')
 
-        # Check /etc/fstab for presence of requested disk
-        exists_in_fstab=$(grep ${blk_uuid} /etc/fstab)
+        # Check /etc/fstab for presence of requested disk or filesystem mount path
+        exists_in_fstab=$(grep "${blk_uuid}\|${fs_mount_path}" /etc/fstab)
         if [[ "${exists_in_fstab}" == "" ]]; then
             # /etc/fstab does not contain a mountpoint for the desired disk and path
             backup_chars=$(date +%s)
