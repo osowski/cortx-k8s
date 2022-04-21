@@ -1,5 +1,7 @@
 # CORTX on Kubernetes
 
+![Latest Build](https://img.shields.io/github/v/tag/seagate/cortx-k8s?sort=semver)
+
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/e752fdd0839141119c3394e6bedd06a6)](https://app.codacy.com/gh/Seagate/cortx-k8s?utm_source=github.com&utm_medium=referral&utm_content=Seagate/cortx-k8s&utm_campaign=Badge_Grade_Settings)
 
 [CORTX Community Object Storage](https://github.com/Seagate/cortx) is 100% open-source object storage, uniquely optimized for mass capacity storage devices. This repository provides capability and support for deploying CORTX onto the [Kubernetes](https://kubernetes.io/) container orchestration platform.
