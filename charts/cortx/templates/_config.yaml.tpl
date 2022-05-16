@@ -1,3 +1,13 @@
+{{- define "config.yaml.service.limits" -}}
+- name: {{ .name }}
+  memory:
+    min: {{ .resources.requests.memory }}
+    max: {{ .resources.limits.memory }}
+  cpu:
+    min: {{ .resources.requests.cpu }}
+    max: {{ .resources.limits.cpu }}
+{{- end }}
+
 {{- define "config.yaml" -}}
 cortx:
   external:
@@ -158,12 +168,6 @@ cortx:
         cpu:
           min: {{ .Values.configmap.cortxHa.health_monitor.resources.requests.cpu }}
           max: {{ .Values.configmap.cortxHa.health_monitor.resources.limits.cpu }}
-      - name: k8s_monitor
-        memory:
-          min: {{ .Values.configmap.cortxHa.k8s_monitor.resources.requests.memory }}
-          max: {{ .Values.configmap.cortxHa.k8s_monitor.resources.limits.memory }}
-        cpu:
-          min: {{ .Values.configmap.cortxHa.k8s_monitor.resources.requests.cpu }}
-          max: {{ .Values.configmap.cortxHa.k8s_monitor.resources.limits.cpu }}
+      {{- include "config.yaml.service.limits" (dict "name" "k8s_monitor" "resources" .Values.configmap.cortxHa.k8s_monitor.resources) | nindent 6 }}
   {{- end }}
 {{- end -}}
